@@ -1,17 +1,15 @@
-class worker {
-    name;
-    designation = 'soil worker';
-    country = 'bd';
-    constructor (name, country){
-        this.name = name;
-        this.country = country;
-    }
-    startWork (){
-        console.log(this.name,'started working')
-    }
-
+function showUser() {
+  fetch("https://jsonplaceholder.typicode.com/users")
+    .then((res) => res.json())
+    .then((data) => loadData(data));
 }
 
-const shahPoranAstha = new worker('Shah poran astha', 'england');
- shahPoranAstha.startWork();
-console.log(shahPoranAstha);
+function loadData(data){
+    const ul = document.getElementById('users');
+    for (const user of data) {
+        const li = document.createElement('li');
+        li.innerText = `name: ${user.name} 
+         email: ${user.email}`;
+        ul.appendChild(li);
+    }
+}
