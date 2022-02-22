@@ -1,15 +1,18 @@
-function showUser() {
-  fetch("https://jsonplaceholder.typicode.com/users")
+function loadData() {
+  fetch("https://jsonplaceholder.typicode.com/posts")
     .then((res) => res.json())
-    .then((data) => loadData(data));
+    .then((data) => displayPost(data));
 }
 
-function loadData(data){
-    const ul = document.getElementById('users');
-    for (const user of data) {
-        const li = document.createElement('li');
-        li.innerText = `name: ${user.name} 
-         email: ${user.email}`;
-        ul.appendChild(li);
-    }
+function displayPost(data) {
+  const parentDiv = document.getElementById("postsection");
+
+  for (const post of data) {
+    const postDiv = document.createElement("div");
+    postDiv.classList.add("post");
+    postDiv.innerHTML = `<h1> ${post.title} </h1>
+    <p>${post.body}</p>`;
+    parentDiv.appendChild(postDiv);
+  }
 }
+
